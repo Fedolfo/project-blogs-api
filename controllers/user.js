@@ -1,6 +1,8 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const { createUser, loginUser, getAllUsers } = require('../services/index');
+const { createUser, loginUser, getAllUsers, getByIdUser } = require('../services/index');
+
+const SERVER_ERROR = 'Server error';
 
 const addUser = async (req, res) => {
   try {
@@ -19,7 +21,7 @@ const addUser = async (req, res) => {
 
     res.status(201).json({ token });
   } catch (err) {
-    res.status(500).json({ message: 'server error', error: err.message });
+    res.status(500).json({ message: SERVER_ERROR, error: err.message });
   }
 };
 
@@ -41,7 +43,7 @@ const addLogin = async (req, res) => {
 
     res.status(200).json({ token });
   } catch (err) {
-    res.status(500).json({ message: 'server error', error: err.message });
+    res.status(500).json({ message: SERVER_ERROR, error: err.message });
   }
 };
 
@@ -49,8 +51,23 @@ const allUsers = async (_req, res) => {
   try {
     const users = await getAllUsers.getAll();
     res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ message: 'server error', error: error.message });
+  } catch (err) {
+    res.status(500).json({ message: SERVER_ERROR, error: err.message });
+  }
+};
+
+const findByIdUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const userId = await getByIdUser.getById(id);
+
+    if (!userId) {
+      return res.status(404).json({ message: 'User does not exist' });
+    }
+
+    res.status(200).json(userId);
+  } catch (err) {
+    res.status(500).json({ message: SERVER_ERROR, error: err.message });
   }
 };
 
@@ -58,4 +75,5 @@ module.exports = {
   addUser,
   addLogin,
   allUsers,
+  findByIdUser,
 };

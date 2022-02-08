@@ -16,6 +16,8 @@ apiRoutes.post('/user', validate, routes.addUser);
 
 apiRoutes.get('/user', auth, routes.allUsers);
 
+apiRoutes.get('/user/:id', auth, routes.findByIdUser);
+
 app.use(apiRoutes);
 
 app.use(errorMiddleware);
