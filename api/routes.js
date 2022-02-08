@@ -1,5 +1,6 @@
-const getUser = require('../controllers/user');
+const { addUser, addLogin } = require('../controllers/user');
 
 module.exports = {
-  getUser,
+  addUser,
+  addLogin,
 };
