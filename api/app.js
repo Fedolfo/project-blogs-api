@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const routes = require('./routes');
 const validateUser = require('../middlewares/validationsUser');
 const validateCategory = require('../middlewares/validationsCategory');
+const validatePost = require('../middlewares/validationsPost');
 
 const auth = require('../auth/validateJWT');
 const { errorMiddleware } = require('../middlewares/error');
@@ -23,6 +24,8 @@ apiRoutes.get('/user/:id', auth, routes.findByIdUser);
 apiRoutes.post('/categories', validateCategory, auth, routes.addCategory);
 
 apiRoutes.get('/categories', auth, routes.allCategories);
+
+apiRoutes.post('/post', validatePost, auth, routes.createPostCategory);
 
 app.use(apiRoutes);
 
