@@ -1,8 +1,9 @@
-const { addUser, addLogin, allUsers, findByIdUser } = require('../controllers/user');
+const { addUser, addLogin, allUsers, findByIdUser, addCategory } = require('../controllers/index');
 
 module.exports = {
   addUser,
   addLogin,
   allUsers,
   findByIdUser,
+  addCategory,
 };
