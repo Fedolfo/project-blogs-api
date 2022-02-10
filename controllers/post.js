@@ -14,6 +14,7 @@ const createPostCategory = async (req, res) => {
     }
 
     const createPostAndCategory = await createPost.create(title, content, userId, categoryIds);
+    console.log('está criando?', createPostAndCategory);
     res.status(201).json(createPostAndCategory);
   } catch (err) {
     console.log('está caindo erro de promisse aqui?', err.message);
