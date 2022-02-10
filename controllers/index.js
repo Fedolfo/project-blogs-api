@@ -1,5 +1,6 @@
 const { addUser, addLogin, allUsers, findByIdUser } = require('./user');
-const { addCategory, allCategories, createPostCategory } = require('./category');
+const { addCategory, allCategories } = require('./category');
+const { createPostCategory, allPosts, findByIdPost } = require('./post');
 
 module.exports = {
   addUser,
@@ -9,4 +10,6 @@ module.exports = {
   addCategory,
   allCategories,
   createPostCategory,
+  allPosts,
+  findByIdPost,
 };

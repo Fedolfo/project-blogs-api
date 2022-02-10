@@ -27,6 +27,10 @@ apiRoutes.get('/categories', auth, routes.allCategories);
 
 apiRoutes.post('/post', validatePost, auth, routes.createPostCategory);
 
+apiRoutes.get('/post', auth, routes.allPosts);
+
+apiRoutes.get('/post/:id', auth, routes.findByIdPost);
+
 app.use(apiRoutes);
 
 app.use(errorMiddleware);
