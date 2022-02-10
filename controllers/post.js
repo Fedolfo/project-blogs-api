@@ -3,8 +3,8 @@ const { createPost, getByIdCategory, getAllPost, getByIdPost } = require('../ser
 const SERVER_ERROR = 'Server error';
 
 const createPostCategory = async (req, res) => {
+  // console.log(createPost.create(req.body));
   const { title, content, categoryIds } = req.body;
-  console.log('recuperando id', req.user.id);
   const userId = req.user.id;
   try {
     const validateCategoriesIds = await getByIdCategory.getById(categoryIds);
@@ -14,7 +14,7 @@ const createPostCategory = async (req, res) => {
     }
 
     const createPostAndCategory = await createPost.create(title, content, userId, categoryIds);
-    console.log('está criando?', createPostAndCategory);
+    console.log(title, content, categoryIds);
     res.status(201).json(createPostAndCategory);
   } catch (err) {
     console.log('está caindo erro de promisse aqui?', err.message);

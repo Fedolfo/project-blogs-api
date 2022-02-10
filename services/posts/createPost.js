@@ -1,13 +1,12 @@
-const { BlogPost, PostCategorie } = require('../../models');
+const { BlogPost, PostsCategories } = require('../../models');
 
 const create = async (title, content, userId, categoryIds) => {
-  await BlogPost.create({ title, content, userId });
-  const [createdPost] = await BlogPost.findAll({ where: { title, content } });
-  const postId = createdPost.dataValues.id;
-  await categoryIds.forEach((categoryId) => {
-    PostCategorie.create({ postId, categoryId });
-  });
+  const createBlogPost = await BlogPost.create({ title, content, userId });
+  const postId = createBlogPost.dataValues.id;
 
+  await categoryIds.forEach((categoryId) => {
+    PostsCategories.create({ postId, categoryId });
+  });
   return { id: postId, userId, title, content };
 };
 
